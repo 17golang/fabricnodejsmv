@@ -1,0 +1,39 @@
+{
+  "name": "fabricnodejsmv",
+  "version": "0.0.1",
+  "description": "fabric nodejs middleware",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/17golang/fabricnodejsmv.git"
+  },
+  "keywords": [],
+  "author": "onchain",
+  "bugs": {
+    "url": "https://github.com/17golang/fabricnodejsmv/issues"
+  },
+  "homepage": "https://github.com/17golang/fabricnodejsmv#readme",
+
+  "license": "Apache-2.0",
+  "dependencies": {
+
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
+    "express-jwt": "^5.1.0",
+    "express-session": "^1.15.2",
+    "fabric-ca-client": ">=1.0.0-alpha <1.0.0-alpha.10",
+    "fabric-client": ">=1.0.0-alpha <1.0.0-alpha.10",
+    "log4js": "^0.6.38",
+    "winston": "^2.2.0",
+    "jsonwebtoken": "^7.3.0"
+
+  }
+
+
+
+}

@@ -11,7 +11,7 @@
    "orgsList": ["org1","org2"],
    "eventWaitTime":"30000",
    "invokeQueryFcnName":"invoke",
-   "orderer":"grpcs://172.16.10.82:7050",
+   "orderer":"grpc://172.16.10.82:7050",
    "users":[
       {
          "username":"admin",

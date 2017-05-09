@@ -40,7 +40,7 @@ var adminUser = null;
 var eventhubs = [];
 var allEventhubs = [];
 
-var invokeChaincode = function (peers, channelName, chaincodeName, chaincodeVersion, args, username, org,invokeQueryFcnName){
+var invokeChaincode = function (peers, channelName, chaincodeName, chaincodeVersion, args, username, org,functionName){
 	logger.debug('\n============ invoke transaction on organization '+org+' ============\n')
 	var closeConnections = function(isSuccess) {
 		for(var key in allEventhubs) {
@@ -62,13 +62,8 @@ var invokeChaincode = function (peers, channelName, chaincodeName, chaincodeVers
 
       //FIXME: change this to read peer dynamically
 			let eh = new EventHub();
-			let data = fs.readFileSync(path.join(__dirname, ORGS[org]['peer1']['tls_cacerts']));
 			eh.setPeerAddr(
-				ORGS[org]['peer1']['events'],
-				{
-					pem: Buffer.from(data).toString(),
-					'ssl-target-name-override': ORGS[org]['peer1']['server-hostname']
-				}
+				ORGS[org]['peer1']['events']
 			);
 			eh.connect();
 			eventhubs.push(eh);
@@ -89,7 +84,7 @@ var invokeChaincode = function (peers, channelName, chaincodeName, chaincodeVers
 			targets: targets,
 			chaincodeId: chaincodeName,
 			chaincodeVersion: chaincodeVersion,
-			fcn: invokeQueryFcnName,
+			fcn: functionName,
 			args: helper.getArgs(args),
 			chainId: channelName,
 			txId: tx_id,

@@ -113,12 +113,8 @@ var getTargets = function(peers, org) {
         for (let key in ORGS[org]) {
             if (ORGS[org].hasOwnProperty(key)) {
                 //FIXME: Can we think a better solution here ?
-                if (key.indexOf('peer') === 0 && ORGS[org][key]["requests"] === 'grpcs://' + peers[index]) {
-                    let data = fs.readFileSync(path.join(__dirname, ORGS[org][key]['tls_cacerts']));
-                    targets.push(new Peer('grpcs://' + peers[index], {
-                        pem: Buffer.from(data).toString(),
-                        'ssl-target-name-override': ORGS[org][key]['server-hostname']
-                    }));
+                if (key.indexOf('peer') === 0 && ORGS[org][key]["requests"] === 'grpc://' + peers[index]) {
+                    targets.push(new Peer('grpc://' + peers[index]));
                 }
             }
         }
@@ -186,7 +182,7 @@ var getRegisteredUsers = function(username, userOrg, isJson) {
     var adminPassword = users[0].secret;
     var member;
     var client = clientForOrg(userOrg);
-    var cop = new copService(ORGS[userOrg].ca, tlsOptions, {keysize: 256, hash: 'SHA2'});
+    var cop = new copService(ORGS[userOrg].ca);
     var enrollmentSecret = null;
     return hfc.newDefaultKeyValueStore({
         path: getKeyStoreForOrg(getOrgName(userOrg))
@@ -263,13 +259,7 @@ var getOrgName = function(org) {
     return ORGS[org].name;
 }
 var getOrderer = function() {
-    var caRootsPath = ORGS.orderer.tls_cacerts;
-    let data = fs.readFileSync(path.join(__dirname, caRootsPath));
-    let caroots = Buffer.from(data).toString();
-    return new Orderer(config.orderer, {
-        'pem': caroots,
-        'ssl-target-name-override': ORGS.orderer['server-hostname']
-    })
+    return new Orderer(ORGS.orderer.url);
 }
 var getKeyStoreForOrg = function(org) {
     return config.keyValueStore + '_' + org;

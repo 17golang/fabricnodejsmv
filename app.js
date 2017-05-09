@@ -71,7 +71,7 @@ logger.info('**************  http://' + host + ':' + port + '  *****************
 server.timeout = 240000;
 
 
-
+//注册登录
 app.post('/users', function(req, res) {
 
 
@@ -103,4 +103,31 @@ app.post('/users', function(req, res) {
     });
 
 
+});
+
+
+// chaincode invoke
+app.post('/channels/:channelName/chaincodes/:chaincodeName', function(req, res) {
+    logger.debug('==================== INVOKE ON CHAINCODE ==================');
+    logger.debug('peers : ' + req.body.peers); // target peers list
+    logger.debug('chaincodeName : ' + req.params.chaincodeName);
+    logger.debug('Args : ' + req.body.args);
+    logger.debug('chaincodeVersion  : ' + req.body.chaincodeVersion);
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    jwt.verify(token, app.get('secret'), function(err, decoded) {
+        if (err) {
+            res.send({
+                success: false,
+                message: 'Failed to authenticate token.'
+            });
+        } else {
+            //res.send(d);
+            logger.debug('User name : ' + decoded.username);
+            logger.debug('Org name  : ' + decoded.orgName);
+            let promise = invoke.invokeChaincode(req.body.peers, req.params.channelName, req.params.chaincodeName, req.body.chaincodeVersion, req.body.args, decoded.username, decoded.orgName);
+            promise.then(function(message) {
+                res.send(message);
+            });
+        }
+    });
 });

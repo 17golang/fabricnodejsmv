@@ -1,42 +1,32 @@
 {
 	"network-config": {
 		"orderer": {
-			"url": "grpc://172.16.10.82:7050",
-			"server-hostname": "orderer0",
-			"tls_cacerts": "../artifacts/tls/orderer/ca-cert.pem"
+			"url": "grpc://192.168.23.228:7050"
 		},
 		"org1": {
-			"name": "peerOrg1",
-			"mspid": "Org1MSP",
+			"name": "PeerOrg1",
+			"mspid": "PeerOrg1",
 			"ca": "http://172.16.10.81:19900",
 			"peer1": {
 				"requests": "grpc://172.16.10.81:7051",
-				"events": "grpc://172.16.10.81:7053",
-				"server-hostname": "peer0",
-				"tls_cacerts": "../artifacts/tls/peers/peer0/ca-cert.pem"
+				"events": "grpc://172.16.10.81:7053"
 			},
 			"peer2": {
-				"requests": "grpc://172.16.10.82:7051",
-				"events": "grpc://172.16.10.82:7053",
-				"server-hostname": "peer1",
-				"tls_cacerts": "../artifacts/tls/peers/peer1/ca-cert.pem"
+				"requests": "grpc://192.168.23.228:7056",
+				"events": "grpc://192.168.23.228:7058"
 			}
 		},
 		"org2": {
 			"name": "peerOrg2",
 			"mspid": "Org2MSP",
-			"ca": "http://localhost:8054",
+			"ca": "http://192.168.23.228:8054",
 			"peer1": {
-				"requests": "grpc://localhost:8051",
-				"events": "grpc://localhost:8053",
-				"server-hostname": "peer2",
-				"tls_cacerts": "../artifacts/tls/peers/peer2/ca-cert.pem"
+				"requests": "grpc://192.168.23.228:8051",
+				"events": "grpc://192.168.23.228:8053"
 			},
 			"peer2": {
-				"requests": "grpc://localhost:8056",
-				"events": "grpc://localhost:8058",
-				"server-hostname": "peer3",
-				"tls_cacerts": "../artifacts/tls/peers/peer3/ca-cert.pem"
+				"requests": "grpc://192.168.23.228:8056",
+				"events": "grpc://192.168.23.228:8058"
 			}
 		}
 	}

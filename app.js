@@ -86,7 +86,7 @@ app.post('/users', function(req, res) {
         orgName: req.body.orgName
     }, app.get('secret'));
 
-    res.send("success!!!");
+    //res.send("success!!!");
 
     var promise = helper.getRegisteredUsers(req.body.username, req.body.orgName, true);
 

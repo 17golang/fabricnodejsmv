@@ -124,10 +124,12 @@ app.post('/channels/:channelName/chaincodes/:chaincodeName', function(req, res) 
             //res.send(d);
             logger.debug('User name : ' + decoded.username);
             logger.debug('Org name  : ' + decoded.orgName);
-            let promise = invoke.invokeChaincode(req.body.peers, req.params.channelName, req.params.chaincodeName, req.body.chaincodeVersion, req.body.args, decoded.username, decoded.orgName);
+            let promise = invoke.invokeChaincode(req.body.peers, req.params.channelName, req.params.chaincodeName, req.body.chaincodeVersion, req.body.args, decoded.username, decoded.orgName,req.body.functionName);
             promise.then(function(message) {
                 res.send(message);
             });
         }
     });
 });
+
+

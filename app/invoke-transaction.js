@@ -40,7 +40,7 @@ var adminUser = null;
 var eventhubs = [];
 var allEventhubs = [];
 
-var invokeChaincode = function (peers, channelName, chaincodeName, chaincodeVersion, args, username, org){
+var invokeChaincode = function (peers, channelName, chaincodeName, chaincodeVersion, args, username, org,invokeQueryFcnName){
 	logger.debug('\n============ invoke transaction on organization '+org+' ============\n')
 	var closeConnections = function(isSuccess) {
 		for(var key in allEventhubs) {
@@ -89,7 +89,7 @@ var invokeChaincode = function (peers, channelName, chaincodeName, chaincodeVers
 			targets: targets,
 			chaincodeId: chaincodeName,
 			chaincodeVersion: chaincodeVersion,
-			fcn: config.invokeQueryFcnName,
+			fcn: invokeQueryFcnName,
 			args: helper.getArgs(args),
 			chainId: channelName,
 			txId: tx_id,

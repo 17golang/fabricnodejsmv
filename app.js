@@ -87,17 +87,18 @@ app.post('/users', function(req, res) {
     }, app.get('secret'));
 
     res.send("success!!!");
-    // var promise = helper.getRegisteredUsers(req.body.username, req.body.orgName, true);
-    //
-    // promise.then(function(response) {
-    //     if (response && typeof response !== 'string') {
-    //         response.token = token;
-    //         res.json(response);
-    //     } else {
-    //         res.json({
-    //             success: false,
-    //             message: response
-    //         });
-    //     }
-    // });
+
+    var promise = helper.getRegisteredUsers(req.body.username, req.body.orgName, true);
+
+    promise.then(function(response) {
+        if (response && typeof response !== 'string') {
+            response.token = token;
+            res.json(response);
+        } else {
+            res.json({
+                success: false,
+                message: response
+            });
+        }
+    });
 });

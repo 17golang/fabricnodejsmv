@@ -1,7 +1,7 @@
 {
 	"network-config": {
 		"orderer": {
-			"url": "grpc://192.168.23.228:7050"
+			"url": "grpc://172.16.10.82:7050"
 		},
 		"org1": {
 			"name": "PeerOrg1",
